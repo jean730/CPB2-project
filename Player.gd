@@ -21,7 +21,7 @@ func name_generator():
 	var consonnes=['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'z']
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	for i in range(3):
+	for _i in range(3):
 		self.ORE_NAME_1+=consonnes[rng.randi()%consonnes.size()]+voyelles[rng.randi()%voyelles.size()]
 		self.ORE_NAME_2+=consonnes[rng.randi()%consonnes.size()]+voyelles[rng.randi()%voyelles.size()]
 func _ready():
@@ -69,6 +69,8 @@ func _input(event):
 		self.get_node("Camera").zoom=Vector2(1,1)
 		self.get_node("PlayerSprite").scale=Vector2(1,1)
 		dezoom = false
+	if event.is_action_released("ui_cancel"):
+		get_tree().quit()
 	if event.is_action_pressed("place") and menu_enabled and get_local_mouse_position().y<150:
 		if selected_building != null:
 			if selected_building < 10 and get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy)==-1:
@@ -139,7 +141,7 @@ func _process(delta):
 
 
 
-func _on_machine_list_input_event(viewport, event, shape_idx):
+func _on_machine_list_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed==false:
 		var pos = get_local_mouse_position()
 		if event.button_index==2:
