@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://drone.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://convoyeur.png" type="Texture" id=10]
 [ext_resource path="res://mine.png" type="Texture" id=11]
 [ext_resource path="res://forge.png" type="Texture" id=12]
+[ext_resource path="res://centrale_charbon.png" type="Texture" id=13]
+[ext_resource path="res://Ressource.tscn" type="PackedScene" id=14]
+[ext_resource path="res://gold-chair.png" type="Texture" id=15]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -42,9 +45,16 @@ animations = [ {
 font_path = "res://FiraSans-Medium.otf"
 
 [sub_resource type="DynamicFont" id=6]
+size = 15
+outline_size = 1
+outline_color = Color( 0.211765, 0.211765, 0.211765, 1 )
 font_data = SubResource( 5 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 511.944, 63 )
+
 [node name="Player" type="Node2D"]
+z_index = 2
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -60,7 +70,7 @@ texture = ExtResource( 3 )
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 4 )
 animation = "New Anim"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -70,19 +80,23 @@ texture = ExtResource( 4 )
 energy = 0.8
 mode = 2
 shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="overlay" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( -373.58, -200.985 )
-scale = Vector2( 0.584377, 0.416162 )
+position = Vector2( -390.762, -44.0067 )
+rotation = 0.0212031
+scale = Vector2( 0.506979, 1.03723 )
 texture = ExtResource( 7 )
 
 [node name="Energy" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -460.0
-margin_top = -285.471
-margin_right = -309.0
-margin_bottom = -256.471
+margin_left = -439.796
+margin_top = -277.153
+margin_right = -288.796
+margin_bottom = -248.153
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -94,10 +108,10 @@ __meta__ = {
 
 [node name="Coins" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -460.0
-margin_top = -249.47
-margin_right = -309.0
-margin_bottom = -220.47
+margin_left = -439.796
+margin_top = -242.152
+margin_right = -288.796
+margin_bottom = -213.152
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -107,25 +121,337 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Ressource8" parent="." instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -467.184, -166.049 )
+scale = Vector2( 0.55, 0.55 )
+type = 3
+real = false
+
+[node name="ORE_1" type="RichTextLabel" parent="."]
+light_mask = 0
+margin_left = -439.796
+margin_top = -205.874
+margin_right = -288.796
+margin_bottom = -176.874
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "text"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource7" parent="." instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -467.456, -194.601 )
+scale = Vector2( 0.55, 0.55 )
+type = 2
+real = false
+
+[node name="ORE_2" type="RichTextLabel" parent="."]
+light_mask = 0
+margin_left = -440.111
+margin_top = -174.968
+margin_right = -289.111
+margin_bottom = -145.968
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "text"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ORE_3" type="RichTextLabel" parent="."]
+light_mask = 0
+margin_left = -439.167
+margin_top = -147.556
+margin_right = -288.167
+margin_bottom = -118.556
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "text"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource9" parent="." instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -467.168, -137.296 )
+scale = Vector2( 0.55, 0.55 )
+type = 4
+real = false
+
 [node name="energy_icon" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( -487.922, -274.801 )
+position = Vector2( -467.718, -266.483 )
 scale = Vector2( 0.247882, 0.278825 )
 texture = ExtResource( 6 )
 
 [node name="uwucoin" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( -488.457, -240 )
+position = Vector2( -468.253, -231.682 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 8 )
 
 [node name="menu" type="Sprite" parent="."]
 light_mask = 0
 position = Vector2( 0, 375 )
+scale = Vector2( 1.005, 1 )
 texture = ExtResource( 9 )
 
-[node name="machine_list" type="Node2D" parent="menu"]
+[node name="Price_1" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = -408.686
+margin_top = -73.4719
+margin_right = -351.686
+margin_bottom = -52.4719
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -379.092, -62.642 )
+scale = Vector2( 0.55, 0.55 )
+type = 2
+real = false
+
+[node name="Price_2" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = -215.364
+margin_top = -72.476
+margin_right = -103.364
+margin_bottom = -53.476
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_8" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = -163.773
+margin_top = -71.8642
+margin_right = -51.7725
+margin_bottom = -52.8642
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource2" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -187.231, -62.3841 )
+scale = Vector2( 0.55, 0.55 )
+type = 2
+real = false
+
+[node name="Ressource3" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -134.919, -63.0758 )
+scale = Vector2( 0.55, 0.55 )
+type = 3
+real = false
+
+[node name="Price_3" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = -46.32
+margin_top = -73.4374
+margin_right = 3.68002
+margin_bottom = -53.4374
+rect_pivot_offset = Vector2( 27.5482, 0 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource7" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( -17.1629, -62.5715 )
+scale = Vector2( 0.55, 0.55 )
+type = 3
+real = false
+
+[node name="Price_4" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 56.8978
+margin_top = -72.2307
+margin_right = 69.8978
+margin_bottom = -52.2307
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_6" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 157.619
+margin_top = -72.5608
+margin_right = 170.619
+margin_bottom = -52.5608
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_7" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 107.204
+margin_top = -73.2288
+margin_right = 120.204
+margin_bottom = -53.2288
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource5" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( 135.074, -62.8628 )
+scale = Vector2( 0.55, 0.55 )
+type = 3
+real = false
+
+[node name="Ressource6" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( 185.43, -62.639 )
+scale = Vector2( 0.55, 0.55 )
+type = 4
+real = false
+
+[node name="Ressource4" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( 86.1312, -62.5437 )
+scale = Vector2( 0.55, 0.55 )
+type = 2
+real = false
+
+[node name="Price_5" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 248.493
+margin_top = -72.8425
+margin_right = 275.493
+margin_bottom = -52.8425
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = " 5k"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_9" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 320.163
+margin_top = -72.4241
+margin_right = 347.163
+margin_bottom = -52.4241
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5k"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_10" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 390.715
+margin_top = -72.4064
+margin_right = 417.715
+margin_bottom = -52.4064
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "5k"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price_11" type="RichTextLabel" parent="menu"]
+light_mask = 0
+margin_left = 460.213
+margin_top = -72.036
+margin_right = 496.213
+margin_bottom = -52.036
+rect_pivot_offset = Vector2( 67.079, 10 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "2M"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ressource8" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( 293.271, -62.8867 )
+scale = Vector2( 0.55, 0.55 )
+type = 2
+real = false
+
+[node name="Ressource9" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( 436.912, -62.5465 )
+scale = Vector2( 0.55, 0.55 )
+type = 4
+real = false
+
+[node name="Ressource10" parent="menu" instance=ExtResource( 14 )]
+light_mask = 0
+position = Vector2( 364.817, -62.5235 )
+scale = Vector2( 0.55, 0.55 )
+type = 3
+real = false
+
+[node name="energy_icon2" type="Sprite" parent="menu"]
+light_mask = 0
+position = Vector2( 500.066, -62.6494 )
+scale = Vector2( 0.142651, 0.173594 )
+texture = ExtResource( 6 )
+
+[node name="machine_list" type="Area2D" parent="menu"]
 position = Vector2( 0, -375 )
+collision_layer = 16
+collision_mask = 16
 
 [node name="convoyeur" type="Sprite" parent="menu/machine_list"]
 light_mask = 0
@@ -134,10 +460,36 @@ texture = ExtResource( 10 )
 
 [node name="forge" type="Sprite" parent="menu/machine_list"]
 light_mask = 0
-position = Vector2( -185, 386 )
+position = Vector2( -162.447, 382.92 )
 texture = ExtResource( 12 )
 
 [node name="mine" type="Sprite" parent="menu/machine_list"]
 light_mask = 0
-position = Vector2( -82, 386 )
+position = Vector2( -19.5211, 387.124 )
 texture = ExtResource( 11 )
+
+[node name="centrale_charbon" type="Sprite" parent="menu/machine_list"]
+light_mask = 0
+position = Vector2( 127.097, 385.915 )
+texture = ExtResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="menu/machine_list"]
+light_mask = 0
+position = Vector2( 368.362, 384.541 )
+texture = ExtResource( 15 )
+
+[node name="Selector" type="Sprite" parent="menu/machine_list"]
+visible = false
+modulate = Color( 1, 1, 1, 0.627451 )
+light_mask = 0
+position = Vector2( 367, 387 )
+scale = Vector2( 1, 1.9 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="menu/machine_list"]
+position = Vector2( 0, 387 )
+shape = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="input_event" from="menu/machine_list" to="." method="_on_machine_list_input_event"]

@@ -4,7 +4,7 @@ var ressource_instance = ressource.instance()
 var combustible = [ressource_instance.Type.COAL,1]
 var combustible_counter=0
 var timer = 0
-var energy_production = 400
+var energy_production = 100
 var duration = 2
 var progress_bar=null
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +22,7 @@ func use_ingredients():
 
 
 func _process(delta):
+	energy_production = 100 * get_parent().get_parent().powerMultiplier
 	if combustible_counter>=combustible[1]:
 		progress_bar.set_alert(false)
 		if timer<=duration:
@@ -39,6 +40,7 @@ func _process(delta):
 
 func _on_Forge_area_entered(area):
 	if area is Ressource and area.type==combustible[0]:
-		area.queue_free()
-		combustible_counter+=1
-		$RichTextLabel.bbcode_text="[center]"+str(combustible_counter)+"[/center]"
+		if area.real==true:
+			area.queue_free()
+			combustible_counter+=1
+			$RichTextLabel.bbcode_text="[center]"+str(combustible_counter)+"[/center]"

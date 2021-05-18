@@ -6,8 +6,8 @@ var ressource = preload("res://Ressource.tscn")
 # var b = "text"
 var new_ressource = null
 var timer = 0
-var energy_consumption = 50
-var duration = 1
+var energy_consumption = 5
+var duration = 3.5
 var progress_bar=null
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,11 +18,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
+	self.duration = 3.5 / get_parent().get_parent().speedMultiplier
 	if timer<duration:
 		timer+=delta
 		progress_bar.set_progress(int(100*timer/duration))
 	else:
-		if (new_ressource==null or new_ressource.position.distance_to(self.position)>64) and get_parent().get_parent().get_node("Ressources").use_energy(energy_consumption):
+		if (new_ressource==null or (new_ressource is Node2D and new_ressource.position.distance_to(self.position)>64)) and get_parent().get_parent().get_node("Ressources").use_energy(energy_consumption):
 			timer-=duration
 			
 			new_ressource = ressource.instance()
