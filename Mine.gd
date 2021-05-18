@@ -23,7 +23,7 @@ func _process(delta):
 		timer+=delta
 		progress_bar.set_progress(int(100*timer/duration))
 	else:
-		if (new_ressource==null or (is_instance_valid(new_ressource) and new_ressource.position.distance_to(self.position)>64)) and get_parent().get_parent().get_node("Ressources").use_energy(energy_consumption):
+		if (not is_instance_valid(new_ressource) or (is_instance_valid(new_ressource) and new_ressource.position.distance_to(self.position)>64)) and get_parent().get_parent().get_node("Ressources").use_energy(energy_consumption):
 			timer-=duration
 			
 			new_ressource = ressource.instance()
