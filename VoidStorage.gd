@@ -1,7 +1,7 @@
 extends Area2D
 var ressource = preload("res://Ressource.tscn")
 var ressource_instance = ressource.instance()
-
+class_name StorageClass
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

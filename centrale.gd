@@ -1,4 +1,5 @@
 extends Node2D
+class_name CentraleClass
 var ressource = preload("res://Ressource.tscn")
 var ressource_instance = ressource.instance()
 var combustible = [ressource_instance.Type.COAL,1]

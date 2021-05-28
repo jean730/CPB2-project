@@ -4,6 +4,9 @@ enum Type {IRON_ORE,COPPER_ORE,IRON_INGOT,COPPER_INGOT,COAL}
 export(Type) var type
 export(bool) var real = true
 var speed = 0.5
+var tileposx=0
+var tileposy=0
+var logmap
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -37,13 +40,12 @@ func _ready():
 			get_node("Sprite").texture = load("res://charbon.png")
 	if not real:
 		get_node("Sprite").set_light_mask(0)
+	logmap = get_parent()
 	pass # Replace with function body.
 
 
 
-func logistics(tile_id,delta):
-	var tileposx = floor(self.position.x/64)
-	var tileposy = floor(self.position.y/64)
+func logistics(tile_id,delta,recursive):
 	var posy = self.position.y/64-tileposy
 	var posx = self.position.x/64-tileposx
 	var oldpos = self.position
@@ -82,34 +84,33 @@ func logistics(tile_id,delta):
 					if self.get_overlapping_areas()[0].real:
 						self.position = oldpos
 		5:
-			if (1-posy)>(posx):
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx-1,tileposy),delta*2)
+			if (1-posy)>(posx) and not recursive:
+				logistics(get_parent().get_cell(tileposx-1,tileposy),delta*2,true)
 			else:
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy+1),delta*2)
+				logistics(get_parent().get_cell(tileposx,tileposy+1),delta*2,true)
 		6:
-			if (1-posy)>(1-posx):
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx+1,tileposy),delta*2)
+			if (1-posy)>(1-posx) and not recursive:
+				logistics(get_parent().get_cell(tileposx+1,tileposy),delta*2,true)
 			else:
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy+1),delta*2)
+				logistics(get_parent().get_cell(tileposx,tileposy+1),delta*2,true)
 		7:
-			if posy>(1-posx):
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx+1,tileposy),delta*2)
+			if posy>(1-posx) and not recursive:
+				logistics(get_parent().get_cell(tileposx+1,tileposy),delta*2,true)
 			else:
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy-1),delta*2)
+				logistics(get_parent().get_cell(tileposx,tileposy-1),delta*2,true)
 		8:
-			if posy>posx:
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx-1,tileposy),delta*2)
+			if posy>posx and not recursive:
+				logistics(get_parent().get_cell(tileposx-1,tileposy),delta*2,true)
 			else:
-				logistics(get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy-1),delta*2)
+				logistics(get_parent().get_cell(tileposx,tileposy-1),delta*2,true)
 
 
 func _process(delta):
 	#print(tile_id," ",tileposx," ",tileposy)
 	if self.real:
 		self.speed = 0.5 * get_parent().get_parent().speedMultiplier
-		var tileposx = floor(self.position.x/64)
-		var tileposy = floor(self.position.y/64)
-		var tile_id=get_parent().get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy)
-		logistics(tile_id,delta)
+		tileposx = floor(self.position.x/64)
+		tileposy = floor(self.position.y/64)
+		logistics(logmap.get_cell(tileposx,tileposy),delta,false)
 	
 	pass

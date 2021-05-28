@@ -15,7 +15,13 @@ var ORE_NAME_1=""
 var ORE_NAME_2=""
 var ORE_NAME_3="Coal"
 #var machines = 
-# Called when the node enters the scene tree for the first time.
+
+func get_machine_at_pos(x,y):
+	for node in get_parent().get_node("logisticsMap").get_children():
+		if is_instance_valid(node) and floor(node.position.x/64)==x and floor(node.position.y/64)==y:
+			if node is ForgeClass or node is CentraleClass or node is MineClass or node is StorageClass:
+				return node
+	return null
 func name_generator():
 	var voyelles=['a','e','i','o','u','y']
 	var consonnes=['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'z']
@@ -29,14 +35,14 @@ func _ready():
 	pass # Replace with function body.
 
 func move(delta):
-	if Input.is_key_pressed(KEY_UP):
-		self.position.y-=300*delta
-	if Input.is_key_pressed(KEY_DOWN):
-		self.position.y+=300*delta
-	if Input.is_key_pressed(KEY_LEFT):
-		self.position.x-=300*delta
-	if Input.is_key_pressed(KEY_RIGHT):
-		self.position.x+=300*delta
+	var y = int(Input.is_key_pressed(KEY_DOWN))-int(Input.is_key_pressed(KEY_UP))
+	var x = int(Input.is_key_pressed(KEY_RIGHT))-int(Input.is_key_pressed(KEY_LEFT))
+	if abs(x)+abs(y)==2:
+		self.position.y+=y*delta*600/sqrt(2)
+		self.position.x+=x*delta*600/sqrt(2)
+	else:
+		self.position.y+=y*delta*600
+		self.position.x+=x*delta*600
 		
 	
 	
@@ -71,9 +77,10 @@ func _input(event):
 		dezoom = false
 	if event.is_action_released("ui_cancel"):
 		get_tree().quit()
-	if event.is_action_pressed("place") and menu_enabled and get_local_mouse_position().y<150:
-		if selected_building != null:
-			if selected_building < 10 and get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy)==-1:
+	
+	if Input.is_action_pressed("place") and menu_enabled and get_local_mouse_position().y<150 and (tileposx>2 or tileposx<-3 or tileposy>2 or tileposy<-3):	
+		if selected_building != null and get_machine_at_pos(tileposx,tileposy)==null and get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy)==-1:
+			if selected_building < 10:
 				if get_parent().get_node("Ressources").enough_ressources("ORE_1",1):
 					get_parent().get_node("logisticsMap").set_cell(tileposx,tileposy,selected_building)
 					get_parent().get_node("Ressources").use_ressources("ORE_1",1)
@@ -108,11 +115,22 @@ func _input(event):
 						get_parent().get_node("Ressources").use_ressources("ORE_2",5000)
 						get_parent().get_node("Ressources").use_ressources("COAL",5000)
 						get_parent().get_node("Ressources").use_energy(2000000)
-	if event.is_action_pressed("delete") and menu_enabled and get_local_mouse_position().y<150:
+	if Input.is_action_pressed("delete") and menu_enabled and get_local_mouse_position().y<150:
+		var node=get_machine_at_pos(tileposx,tileposy)
 		if  get_parent().get_node("logisticsMap").get_cell(tileposx,tileposy)!=-1:
 			get_parent().get_node("logisticsMap").set_cell(tileposx,tileposy,-1)
 			get_parent().get_node("Ressources").add_ressources("ORE_1",5)
-		else:
+		elif node!=null and not node is StorageClass:
+			if node is MineClass:
+				get_parent().get_node("Ressources").add_ressources("ORE_2",5)
+			elif node is ForgeClass:
+				get_parent().get_node("Ressources").add_ressources("ORE_1",5)
+				get_parent().get_node("Ressources").add_ressources("ORE_2",5)
+			elif node is CentraleClass:
+				get_parent().get_node("Ressources").add_ressources("ORE_1",5)
+				get_parent().get_node("Ressources").add_ressources("ORE_2",5)
+				get_parent().get_node("Ressources").add_ressources("COAL",5)
+			node.queue_free()
 			pass
 		
 func _process(delta):
@@ -124,17 +142,17 @@ func _process(delta):
 	get_node("ORE_2").text = self.ORE_NAME_2+": "+str(int(get_parent().get_node("Ressources").get_ressources("ORE_2")))
 	get_node("ORE_3").text = self.ORE_NAME_3+": "+str(int(get_parent().get_node("Ressources").get_ressources("COAL")))
 	if get_parent().get_node("Ressources").energy>coin_threshold:
-		coin_threshold+=100000
-		get_parent().get_node("Ressources").add_ressources("coins",1)
-		print(coin_threshold,"  ",get_parent().get_node("Ressources").get_ressources("coins"))
-		get_parent().speedMultiplier = 1+0.1*get_parent().get_node("Ressources").get_ressources("coins")
+		var new_coin_threshold=floor(get_parent().get_node("Ressources").energy/100000)*100000+100000
+		get_parent().get_node("Ressources").add_ressources("coins",floor((new_coin_threshold-coin_threshold)/100000))
+		coin_threshold=new_coin_threshold
+		get_parent().speedMultiplier = min(1+0.1*get_parent().get_node("Ressources").get_ressources("coins"),10)
 		get_parent().powerMultiplier = 1+0.1*get_parent().get_node("Ressources").get_ressources("coins")
 	if menu_enabled:
 		if $menu.position.y>225:
-			$menu.position.y-=10
+			$menu.position.y-=1000*delta
 	else:
 		if $menu.position.y<375:
-			$menu.position.y+=10
+			$menu.position.y+=1000*delta
 		
 	pass
 

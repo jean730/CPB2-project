@@ -70,7 +70,7 @@ texture = ExtResource( 3 )
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 4 )
 animation = "New Anim"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -93,10 +93,10 @@ texture = ExtResource( 7 )
 
 [node name="Energy" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -439.796
-margin_top = -277.153
-margin_right = -288.796
-margin_bottom = -248.153
+margin_left = -463.0
+margin_top = -277.0
+margin_right = -278.0
+margin_bottom = -247.0
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -108,10 +108,10 @@ __meta__ = {
 
 [node name="Coins" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -439.796
-margin_top = -242.152
-margin_right = -288.796
-margin_bottom = -213.152
+margin_left = -462.796
+margin_top = -239.152
+margin_right = -311.796
+margin_bottom = -210.152
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -123,16 +123,16 @@ __meta__ = {
 
 [node name="Ressource8" parent="." instance=ExtResource( 14 )]
 light_mask = 0
-position = Vector2( -467.184, -166.049 )
+position = Vector2( -490.184, -166.049 )
 scale = Vector2( 0.55, 0.55 )
 type = 3
 real = false
 
 [node name="ORE_1" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -439.796
+margin_left = -462.796
 margin_top = -205.874
-margin_right = -288.796
+margin_right = -311.796
 margin_bottom = -176.874
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
@@ -145,16 +145,16 @@ __meta__ = {
 
 [node name="Ressource7" parent="." instance=ExtResource( 14 )]
 light_mask = 0
-position = Vector2( -467.456, -194.601 )
+position = Vector2( -490.456, -194.601 )
 scale = Vector2( 0.55, 0.55 )
 type = 2
 real = false
 
 [node name="ORE_2" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -440.111
+margin_left = -463.111
 margin_top = -174.968
-margin_right = -289.111
+margin_right = -312.111
 margin_bottom = -145.968
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
@@ -167,9 +167,9 @@ __meta__ = {
 
 [node name="ORE_3" type="RichTextLabel" parent="."]
 light_mask = 0
-margin_left = -439.167
+margin_left = -462.167
 margin_top = -147.556
-margin_right = -288.167
+margin_right = -311.167
 margin_bottom = -118.556
 rect_pivot_offset = Vector2( 27.5482, 0 )
 custom_fonts/normal_font = SubResource( 6 )
@@ -182,20 +182,20 @@ __meta__ = {
 
 [node name="Ressource9" parent="." instance=ExtResource( 14 )]
 light_mask = 0
-position = Vector2( -467.168, -137.296 )
+position = Vector2( -490.168, -137.296 )
 scale = Vector2( 0.55, 0.55 )
 type = 4
 real = false
 
 [node name="energy_icon" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( -467.718, -266.483 )
+position = Vector2( -490.718, -266.483 )
 scale = Vector2( 0.247882, 0.278825 )
 texture = ExtResource( 6 )
 
 [node name="uwucoin" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( -468.253, -231.682 )
+position = Vector2( -491.253, -228.682 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 8 )
 
@@ -492,4 +492,5 @@ shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
+
 [connection signal="input_event" from="menu/machine_list" to="." method="_on_machine_list_input_event"]

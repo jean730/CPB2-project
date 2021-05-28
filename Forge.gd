@@ -1,4 +1,5 @@
 extends Node2D
+class_name ForgeClass
 var ressource = preload("res://Ressource.tscn")
 var ressource_instance = ressource.instance()
 var product = null

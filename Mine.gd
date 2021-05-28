@@ -1,6 +1,6 @@
 extends Node2D
 var ressource = preload("res://Ressource.tscn")
-
+class_name MineClass
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

@@ -7,7 +7,6 @@ var storage = {
 	"ORE_2":20,
 	"COAL":0,
 	"coins":0
-	
 }
 # Called when the node enters the scene tree for the first time.
 func use_energy(quantity):
