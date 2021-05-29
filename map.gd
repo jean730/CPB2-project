@@ -14,8 +14,8 @@ func generate_map():
 	noise.octaves = 1
 	noise.period = 10.0
 	noise.persistence = 0.2
-	for x in range(-300,300):
-		for y in range(-300,300):
+	for x in range(-500,500):
+		for y in range(-500,500):
 			if noise.get_noise_3d(x,y,0)>0.6:
 				self.set_cell(x,y,2)
 			elif noise.get_noise_3d(x,y,1000)>0.6:

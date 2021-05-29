@@ -1,7 +1,7 @@
 extends Node
 
 
-var energy=0
+var energy=100000000
 var storage = {
 	"ORE_1":150,
 	"ORE_2":20,

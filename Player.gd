@@ -148,7 +148,7 @@ func _process(delta):
 		get_parent().speedMultiplier = min(1+0.1*get_parent().get_node("Ressources").get_ressources("coins"),10)
 		get_parent().powerMultiplier = 1+0.1*get_parent().get_node("Ressources").get_ressources("coins")
 	if menu_enabled:
-		if $menu.position.y>225:
+		if $menu.position.y>230:
 			$menu.position.y-=1000*delta
 	else:
 		if $menu.position.y<375:
@@ -219,7 +219,5 @@ func _on_machine_list_input_event(_viewport, event, _shape_idx):
 					selected_building=Building_type.CHAIR
 					get_node("menu/machine_list/Selector").scale=Vector2(1,1.8)
 					get_node("menu/machine_list/Selector").position=Vector2(367,387)
-			print(pos.x)
 			if selected_building != null:
 				get_node("menu/machine_list/Selector").set_visible(true)
-		print(selected_building)

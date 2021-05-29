@@ -70,7 +70,6 @@ texture = ExtResource( 3 )
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 4 )
 animation = "New Anim"
-frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]

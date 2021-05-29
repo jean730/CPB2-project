@@ -59,9 +59,7 @@ func _on_Forge_area_entered(area):
 					ressource_instance.Type.IRON_ORE:
 						ingredients=Vector2(ressource_instance.Type.IRON_ORE,1)
 						product = ressource_instance.Type.IRON_INGOT
-				print(product,ingredients)
 			if area.type==ingredients[0]:
 				area.queue_free()
-				print(area.type)
 				ingredients_counter+=1
 				$RichTextLabel.bbcode_text="[center]"+str(ingredients_counter)+"[/center]"
