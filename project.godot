@@ -48,6 +48,7 @@ config/name="projet CPB2"
 run/main_scene="res://Game.tscn"
 boot_splash/image="res://fond.png"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 
